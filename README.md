@@ -34,3 +34,5 @@ Vercel usa `vercel.json` y publica `dist/`. GitHub está conectado al proyecto d
 ## Verificación
 
 Probado con Chrome automatizado a 1440, 390 y 320 px: sin errores de consola ni desplazamiento horizontal; carta, descarga, navegación de galería con teclado, ciclo de 19 razones, velitas y activación/pausa de audio. Respetan `prefers-reduced-motion`. Las pruebas no sustituyen una revisión en un teléfono físico.
+
+Messi Ronaldo es un minijuego de mascota: comidita, limpieza y cariño con guardado local en este navegador. Canasta de seis zanahorias que se repone a los 20 segundos, baño con espuma, juego y caricias. Los niveles bajan suavemente con el tiempo, sin muerte ni pérdida del personaje. Movimiento con WAAPI; pausa explícita y activación voluntaria si el dispositivo solicita movimiento reducido.

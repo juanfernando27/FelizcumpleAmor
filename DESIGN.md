@@ -196,3 +196,5 @@ El foco global usa un contorno dorado de (3px) separado (6px). En las secciones 
 - **Don't** confundir los colores auxiliares derivados del sidecar con nuevos colores aprobados del producto.
 
 La sorpresa final conserva vino, rosa y oro. Caja de regalo CSS, botones de respuesta y diálogo con conejito geométrico CSS, luna y estrellas. Entrada de 2.2 s, salto de 2 s y parpadeo de 4.5 s. Movimiento reducido elimina animación; el usuario puede pausarla o cerrar la escena. Música con HTMLAudioElement y dos pistas locales en ciclo.
+
+El minijuego de Messi Ronaldo conserva la escena y añade tres medidores semánticos y acciones de canasta, jabón y pelota. Sus dibujos son CSS. El movimiento activo usa WAAPI (salto suave de 2.1 s, orejas de 2.6 s y parpadeo de 4.2 s), se cancela al cerrar y respeta movimiento reducido con activación voluntaria. El progreso se guarda localmente y la canasta se repone sin compras.
