@@ -22,3 +22,4 @@ dialog{border:0;padding:28px;background:#2e0b1b;color:var(--paper);max-width:min
 @media(max-width:700px){.gift-section h2{font-size:2.6rem}.love-no{left:calc(50% + 65px)}.bunny-cinema{padding:40px 18px 25px;min-height:0}.cinema-intro{font-size:1.4rem;margin-top:24px}.bunny-world{height:290px}.cinema-moon{width:65px;height:65px;top:55px;right:10%}.cinema-controls{gap:6px}.playlist-controls{gap:18px}.playlist-section>p{font-size:.875rem}.playlist-section .small{font-size:.75rem}}
 @media(prefers-reduced-motion:reduce){.bunny-cinema *{animation:none!important}.love-buttons #love-yes,.love-no{transition:none}.gift-box.unwrapped .gift-lid,.gift-box.unwrapped .gift-bow{transform:none}.cinema-caption{opacity:1!important}}
 
+@media(max-width:700px){.cinema-moon{top:14px;left:24px;right:auto;width:36px;height:36px}}
