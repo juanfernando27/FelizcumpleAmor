@@ -176,7 +176,7 @@ Diálogo nativo oscuro, imagen contenida, controles circulares de (46px), pies m
 
 ### Accessible interaction
 
-El foco global usa un contorno dorado de (3px) separado (6px). Un enlace de salto aparece al enfocar. Los cambios de razones y deseo usan regiones de estado; el contenido decorativo queda oculto a tecnologías de asistencia. Las imágenes tienen texto alternativo y el origen de la imagen imaginada de Gael se explica en su pie visible. No hay campos ni chips en la implementación actual; no se prescriben estilos inventados para ellos.
+El foco global usa un contorno dorado de (3px) separado (6px). En las secciones claras de carta, razones y futuro, el foco usa vino para conservar contraste. Un enlace de salto aparece al enfocar. Los cambios de razones y deseo usan regiones de estado; el contenido decorativo queda oculto a tecnologías de asistencia. Las imágenes tienen texto alternativo y el origen de la imagen imaginada de Gael se explica en su pie visible. No hay campos ni chips en la implementación actual; no se prescriben estilos inventados para ellos.
 
 ## Do's and Don'ts
 
