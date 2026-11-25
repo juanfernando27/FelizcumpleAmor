@@ -1,0 +1,12 @@
+{
+  "name": "felizcumple-amor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Un regalo de cumpleaños para mi amor, con un pedacito de nuestro futuro.",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node --check public/app.js && node --check scripts/build.mjs && node --check scripts/serve.mjs"
+  }
+}
