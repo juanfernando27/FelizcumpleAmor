@@ -86,13 +86,7 @@ function celebrate() {
     animation.onfinish = () => piece.remove();
   }
 }
-$('#blow-candles').addEventListener('click', () => {
-  const out = candles.classList.toggle('is-out');
-  candles.setAttribute('aria-label', out ? '19 velitas apagadas. ¡Feliz cumpleaños!' : '19 velitas encendidas');
-  $('#blow-candles').textContent = out ? 'Volver a encender' : 'Soplar las velitas';
-  $('#wish-message').textContent = out ? '¡Felices 19, mi amor! Que la vida te abrace tan bonito como tú me abrazas.' : 'Yo ya tengo el mío: seguir celebrándote.';
-  if (out) celebrate();
-});
+/* Birthday sequence lives in birthday.js. */
 
 const audio = $('#love-audio');
 const tracks = [
@@ -171,6 +165,7 @@ try {
 } catch { /* Care remains playable when storage is unavailable. */ }
 let moving = !reducedMotion.matches;
 let idleAnimations = [], actionAnimations = [], careTimer, refillTimer, effectTimer;
+let roamAnimation;
 let busy = false;
 function savePet() { try { localStorage.setItem(petKey, JSON.stringify(pet)); } catch {} }
 function agePet() {
@@ -196,17 +191,31 @@ function paintPet() {
   savePet();
 }
 function sayPet(message) { $('#pet-message').textContent = message; }
-function stopIdle() { idleAnimations.forEach(a => a.cancel()); idleAnimations = []; }
+function stopIdle(resetRoute = false) {
+  idleAnimations.forEach(a => a.cancel()); idleAnimations = [];
+  if (roamAnimation) {
+    roamAnimation.pause();
+    if (resetRoute) { roamAnimation.cancel(); roamAnimation = null; }
+  }
+}
 function startIdle() {
   stopIdle();
   $('#bunny-pause').setAttribute('aria-pressed', String(!moving));
   $('#bunny-pause').textContent = moving ? 'Pausar movimiento' : 'Activar movimiento';
   if (!moving || !bunnyDialog.open) return;
+  if (!roamAnimation) {
+    const room = $('.pet-playground').clientWidth;
+    const reach = Math.max(18, (room - 190) / 2 - 10);
+    const stops = [0, 1/3, 2/3, 1, 2/3, 1/3, 0, -1/3, -2/3, -1, -2/3, -1/3, 0];
+    roamAnimation = $('.pet-roamer').animate(stops.map((x, i) => ({ transform: 'translateX(' + x * reach + 'px)', offset: i / 12 })), {duration:8400,iterations:Infinity,easing:'linear'});
+  } else { roamAnimation.play(); }
   idleAnimations.push(bunny.animate([
-    { transform: 'translateY(0) rotate(-3deg)' },
-    { transform: 'translateY(-18px) rotate(3deg)', offset:.5 },
-    { transform: 'translateY(0) rotate(-3deg)' }
-  ], { duration:2100, iterations:Infinity, easing:'ease-in-out' }));
+    { transform: 'translateY(0) scale(1.03,.97) rotate(-3deg)', offset:0 },
+    { transform: 'translateY(-35px) scale(.98,1.02) rotate(3deg)', offset:.46 },
+    { transform: 'translateY(0) scale(1.04,.96) rotate(-3deg)', offset:.92 },
+    { transform: 'translateY(0) scale(1.03,.97) rotate(-3deg)', offset:1 }
+  ], { duration:700, iterations:Infinity, easing:'ease-in-out' }));
+  idleAnimations.push($('.bunny-shadow').animate([{transform:'scale(1)',opacity:.5},{transform:'scale(.7)',opacity:.25},{transform:'scale(1)',opacity:.5}],{duration:700,iterations:Infinity,easing:'ease-in-out'}));
   idleAnimations.push($('.ear-left').animate([{transform:'rotate(-15deg)'},{transform:'rotate(-29deg)'},{transform:'rotate(-15deg)'}],{duration:2600,iterations:Infinity,easing:'ease-in-out'}));
   document.querySelectorAll('.eye').forEach(eye => idleAnimations.push(eye.animate([{transform:'scaleY(1)',offset:0},{transform:'scaleY(1)',offset:.92},{transform:'scaleY(.08)',offset:.96},{transform:'scaleY(1)',offset:1}],{duration:4200,iterations:Infinity})));
 }
@@ -228,7 +237,8 @@ function petEffect(kind) {
 function care(kind) {
   if (busy) return;
   if (kind === 'feed' && !pet.carrots) { sayPet('La canasta se está llenando. Mientras tanto, ¿jugamos?'); return; }
-  busy = true; stopIdle();
+  busy = true;
+  if (kind === 'feed') stopIdle();
   if (kind === 'feed') {
     pet.carrots--; pet.food=clamp(pet.food+18); pet.love=clamp(pet.love+4); pet.clean=clamp(pet.clean-3);
     cinema.classList.add('pet-eating'); sayPet('¡Ñam, ñam! Esa zanahoria sabe a amor.');
@@ -245,11 +255,11 @@ function care(kind) {
     pet.love=clamp(pet.love+8); petEffect('hearts'); sayPet('Mmm… tus caricias son mi lugar favorito.');
   }
   pet.updated=Date.now(); paintPet();
-  if(moving) actionAnimations.push(bunny.animate(kind==='play' ? [{transform:'translateY(0) rotate(-5deg)'},{transform:'translateY(-48px) rotate(8deg)'},{transform:'translateY(0) rotate(-5deg)'}] : [{transform:'rotate(-4deg) translateY(0)'},{transform:'rotate(4deg) translateY(-6px)'},{transform:'rotate(-4deg) translateY(0)'}],{duration:kind==='play'?650:350,iterations:kind==='play'?3:5,easing:'ease-in-out'}));
+  if (moving && kind === 'feed') actionAnimations.push($('.bunny-mouth').animate([{transform:'scaleY(1)'},{transform:'scaleY(.45)'},{transform:'scaleY(1)'}],{duration:280,iterations:7,easing:'ease-in-out'}));
   effectTimer=setTimeout(()=>{clearAction();paintPet();startIdle();},moving?2100:900);
 }
 function replayBunny() {
-  clearAction(); stopIdle(); moving = !reducedMotion.matches;
+  clearAction(); stopIdle(true); moving = !reducedMotion.matches;
   paintPet(); startIdle();
   if(moving) actionAnimations.push($('.bunny-traveler').animate([{transform:'translateX(-260px) rotate(-12deg)',opacity:0},{transform:'translateX(0) rotate(0)',opacity:1}],{duration:1200,easing:'cubic-bezier(.23,1,.32,1)'}));
 }
@@ -267,5 +277,7 @@ $('#pet-touch').addEventListener('click',()=>care('pet'));
 $('#close-bunny').addEventListener('click',()=>bunnyDialog.close());
 $('#bunny-replay').addEventListener('click',replayBunny);
 $('#bunny-pause').addEventListener('click',()=>{moving=!moving;clearAction();paintPet();startIdle();});
-bunnyDialog.addEventListener('close',()=>{stopIdle();clearAction();clearInterval(careTimer);savePet();});
+bunnyDialog.addEventListener('close',()=>{stopIdle(true);clearAction();clearInterval(careTimer);savePet();});
 reducedMotion.addEventListener('change',()=>{moving=!reducedMotion.matches;clearAction();paintPet();startIdle();});
+
+new ResizeObserver(() => { if (bunnyDialog.open) { stopIdle(true); if (!cinema.classList.contains('pet-eating')) startIdle(); } }).observe($('.pet-playground'));

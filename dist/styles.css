@@ -28,3 +28,55 @@ dialog{border:0;padding:28px;background:#2e0b1b;color:var(--paper);max-width:min
 @media(hover:hover) and (pointer:fine){.pet-action:not(:disabled):hover{background:#7b3653}#pet-touch:hover span{opacity:1}}
 @media(max-width:700px){.pet-game .bunny-cinema{padding:24px 14px 18px}.pet-game .cinema-intro{font-size:1.35rem;margin:20px auto 18px}.pet-game .cinema-moon{width:28px;height:28px;top:12px;left:18px;right:auto}.pet-stats{gap:12px}.pet-stats label{font-size:.75rem}.pet-game .bunny-world{height:255px}.pet-actions{gap:7px}.pet-action{min-height:143px;padding:12px 4px 10px}.pet-action strong{font-size:.75rem;line-height:1.4;max-width:90px}.pet-action small{font-size:.6875rem;line-height:1.4;min-height:28px}.pet-game .cinema-caption>p.pet-message{font-size:.8125rem;min-height:46px}.pet-game .cinema-controls{gap:4px}.pet-game .pet-tip{font-size:.6875rem}.pet-dirt{top:132px}#pet-touch{top:12px}.pet-game .cinema-caption h2{font-size:2.3rem}}
 
+/* A portrait in three poses, a real little cake, and a single birthday moment. */
+.birthday-stage{width:min(100%,1020px);height:440px;margin:34px auto 12px;position:relative;isolation:isolate;overflow:hidden;border-radius:24px;background:radial-gradient(ellipse at 55% 85%,#78334d99,transparent 67%)}
+.birthday-character{position:absolute;width:42%;max-width:420px;aspect-ratio:1;left:5%;bottom:25px;transform-origin:50% 95%;z-index:2}
+.character-sprite{width:100%;height:100%;background-image:url('assets/cumpleanera-sprite.png');background-size:300% 100%;background-position:0 0;background-repeat:no-repeat}
+[data-phase=inhaling] .character-sprite{background-position:50% 0}[data-phase=blowing] .character-sprite{background-position:100% 0}
+.party-orbit{position:absolute;width:390px;height:390px;border:1px solid #c9879e2b;border-radius:50%;left:5%;bottom:10px;z-index:-1}.orbit-two{width:320px;height:320px;left:auto;right:8%;bottom:10px}
+.cake-scene{position:absolute;width:36%;max-width:370px;height:255px;right:7%;bottom:25px;z-index:3;filter:drop-shadow(0 17px 12px #22051044)}
+.cake-plate{position:absolute;bottom:25px;left:-5%;width:110%;height:28px;border-radius:50%;background:#f6d7b0;box-shadow:inset 0 -8px #ba8b61}
+.cake-pedestal{position:absolute;left:42%;width:16%;bottom:0;height:35px;background:#e2ba8c;border-radius:0 0 30% 30%}.cake-pedestal:after{content:'';position:absolute;bottom:0;left:-65%;width:230%;height:10px;border-radius:50%;background:#eecba4}
+.cake-bottom{position:absolute;bottom:44px;left:0;width:100%;height:108px;border-radius:12px 12px 35% 35% / 12px 12px 17% 17%;background:linear-gradient(90deg,#c97896,#ecaac0 25%,#edb2c5 55%,#bb637f);box-shadow:inset 0 -12px #9b48634d}
+.cake-trim{position:absolute;bottom:13px;left:4%;right:4%;height:12px;border-bottom:7px dotted #fff1df;border-radius:0 0 40% 40%}.cake-dedication{position:absolute;inset:31px 12px auto;font:500 1.6rem var(--font-hand);color:#602039}
+.cake-top{position:absolute;bottom:140px;left:4%;width:92%;height:58px;background:#f8d3cb;border-radius:50% 50% 15% 15% / 30% 30% 20% 20%}
+.cake-top:before{content:'';position:absolute;top:-9px;left:0;width:100%;height:32px;border-radius:50%;background:#fff0df;box-shadow:inset 0 5px #fff9ee}
+.cake-icing{position:absolute;top:13px;left:0;width:100%;height:24px;background:#fff0df;border-radius:0 0 10px 10px}
+.cake-icing i{position:absolute;top:13px;width:13%;height:28px;left:0;background:#fff0df;border-radius:0 0 18px 18px}.cake-icing i:nth-child(2){left:15%;height:15px}.cake-icing i:nth-child(3){left:30%;height:22px}.cake-icing i:nth-child(4){left:45%;height:12px}.cake-icing i:nth-child(5){left:60%;height:24px}.cake-icing i:nth-child(6){left:75%;height:16px}.cake-icing i:nth-child(7){left:87%;height:22px}
+.cake-cherries{position:absolute;bottom:171px;left:11%;right:11%;height:18px;display:flex;justify-content:space-between;z-index:2}.cake-cherries i{width:17px;height:17px;border-radius:50%;background:#ad3658;box-shadow:inset 4px 3px #d96a88}
+.cake-scene .candles{position:absolute;bottom:199px;left:8%;width:84%;max-width:none;height:60px;margin:0;padding:0;gap:0;display:flex;justify-content:space-between;align-items:flex-end;z-index:4}
+.cake-scene .candle{width:7px;height:35px;background:#c87394;border-radius:2px 2px 0 0}.cake-scene .candle:nth-child(2n){height:43px;background:#a2c3c2}.cake-scene .candle:nth-child(3n){height:38px;background:#efc896}.cake-scene .candle:before{left:3px;height:5px;top:-5px;width:1px;background:#6f4b40}
+.cake-scene .flame{left:-1px;top:-22px;width:9px;height:18px;background:#ffd286;box-shadow:0 0 0 3px #ffbc4320;transform-origin:50% 100%;animation:cake-flame 1.2s ease-in-out infinite alternate}.cake-scene .candle:nth-child(2n) .flame{animation-delay:-.7s}.cake-scene .candle:nth-child(3n) .flame{animation-delay:-.3s}
+.cake-scene .candle.is-out .flame{opacity:0;animation:none}.candle-smoke{position:absolute;width:10px;height:20px;top:-23px;left:-2px;border:2px solid #f7e8e7;border-bottom:0;border-right:0;border-radius:60% 0 0 0;opacity:0}
+.cake-age{position:absolute;right:14px;bottom:73px;font:500 2.3rem var(--font-hand);color:#733047;transform:rotate(8deg)}
+.birthday-breath{position:absolute;left:38%;top:36%;width:28%;height:75px;z-index:5;pointer-events:none;opacity:0;transform:rotate(8deg);transform-origin:left center}
+.birthday-breath i{display:block;position:absolute;width:100%;height:18px;border-top:2px solid #f9dccc99;border-radius:50%;top:25px;left:0}.birthday-breath i:nth-child(2){top:5px;width:82%;left:8%}.birthday-breath i:nth-child(3){top:46px;width:86%;left:8%}
+[data-phase=blowing] .birthday-breath{opacity:1;animation:birthday-gust .8s ease-out infinite}
+.birthday-scene-note{position:absolute;right:10%;top:15px;max-width:200px!important;text-align:left;color:var(--gold);font:500 1.6rem/1.1 var(--font-hand);transform:rotate(6deg)}
+.birthday-controls{display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap}.birthday-controls [hidden]{display:none}.birthday-controls .button:disabled{cursor:wait;opacity:.8}.birthday .wish-message{max-width:650px;min-height:55px}
+@keyframes cake-flame{from{transform:rotate(-8deg) scaleY(.95)}to{transform:rotate(9deg) scaleY(1.08)}}
+@keyframes birthday-gust{from{transform:translateX(-6px) rotate(8deg);opacity:.35}to{transform:translateX(18px) rotate(8deg);opacity:.9}}
+/* The entire pet (touch target, dirt, effects and shadow) travels together. */
+.pet-game .pet-playground{height:300px;max-width:680px;overflow:hidden}
+.pet-roamer{position:absolute;width:220px;height:280px;left:calc(50% - 110px);bottom:0}
+.pet-game .pet-roamer .bunny-world{height:280px;width:220px}
+.pet-game .pet-roamer .bunny-traveler{bottom:14px}
+.pet-ground{position:absolute;left:2%;right:2%;height:18px;bottom:3px;border-radius:50%;background:#13061533;border-bottom:1px solid #b8758f44}
+.pet-game .pet-roamer .pet-dirt{top:157px}
+.pet-roamer #pet-touch{top:32px;bottom:4px}
+@media(max-width:700px){
+ .birthday-stage{height:450px;margin-top:20px;border-radius:18px}
+ .birthday-character{width:78%;max-width:330px;left:-7%;bottom:119px}
+ .cake-scene{width:77%;max-width:310px;right:2%;bottom:23px;height:255px}
+ .birthday-breath{left:40%;top:34%;width:43%;height:70px;transform:rotate(16deg)}
+ .birthday-scene-note{right:5%;top:10px;font-size:1.2rem;max-width:130px!important}
+ .party-orbit{width:300px;height:300px;left:-12%;bottom:100px}.orbit-two{left:auto;right:-5%;bottom:15px;width:260px;height:260px}
+ .cake-dedication{font-size:1.4rem}.cake-age{font-size:1.8rem;right:12px;bottom:76px}
+ .cake-scene .candle{width:6px}.cake-scene .candle:before{left:2px}.cake-scene .flame{width:7px;height:15px;top:-19px;left:-.5px}
+ .birthday-controls{gap:4px 18px}.birthday .wish-message{font-size:.875rem}
+ .pet-game .pet-playground{height:295px}.pet-game .pet-roamer .bunny-world{height:280px}
+}
+@media(max-width:360px){.birthday-stage{height:420px}.birthday-character{width:82%;left:-8%;bottom:130px}.cake-scene{width:83%;right:0;bottom:21px}.cake-scene .candle{width:5px}.cake-scene .flame{width:6px;left:0}.birthday-breath{top:30%}}
+@media(prefers-reduced-motion:reduce){.cake-scene .flame,[data-phase=blowing] .birthday-breath{animation:none}.birthday-breath{display:none}}
+
+@media(max-width:700px){.birthday-character{bottom:160px}.birthday-breath{top:25%;left:39%;width:48%}} @media(max-width:360px){.birthday-character{bottom:170px}.birthday-breath{top:23%}}

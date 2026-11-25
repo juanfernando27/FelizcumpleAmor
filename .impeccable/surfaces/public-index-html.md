@@ -22,3 +22,7 @@ FIRST VIEWPORT: Navegación discreta; titular centrado y grande sobre tres fotog
 FORM: Caja de recuerdos, candidato 7. Familias consideradas: canción dedicada, álbum de viaje, foto de cabina, carta postal, cortina de celebración, galería íntima y caja de recuerdos. seed:00d7765c8c1392f9. Los seis mundos del catálogo no superan la identificación personal ni la claridad de las fotos familiares; se conserva su disciplina de escala y continuidad de material, sin sus motivos.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+## Extensión de cumpleaños y mascota
+
+Petición confirmada: Messi Ronaldo salta de lado a lado y se detiene solo para comer; la cumpleañera aparece en caricatura tomando aire y soplando un pastel completo con 19 velitas. Se mantiene el sistema visual de vino, rosa, oro y fotografías del regalo. La nueva ilustración es un sprite transparente de tres poses generado con referencia a la foto aportada; su procedencia vive en ASSETS.md y el prompt en el PNG. La escena tiene estados ready/inhaling/blowing/celebrated, apagado progresivo, humo, confeti y repetición. La mascota usa un contenedor móvil para que las caricias y los efectos sigan al personaje. La pausa manual y la preferencia de movimiento reducido siguen disponibles.
