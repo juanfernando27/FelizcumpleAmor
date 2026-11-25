@@ -1,6 +1,6 @@
 # Para ti, siempre — Felices 19
 
-Un regalo de Juan Fernando para su amor. Álbum con seis fotos, carta desplegable y descargable, 19 razones, capítulo dedicado a su futuro hijo Gael Fernando Urbano Quintero y velitas interactivas. Piano instrumental original sintetizado en el navegador, opcional y sin reproducción automática.
+Un regalo de Juan Fernando para su amor. Álbum con seis fotos, carta desplegable y descargable, 19 razones, capítulo dedicado a su futuro hijo Gael Fernando Urbano Quintero y velitas interactivas. Lista musical de dos canciones aportadas por el usuario, con repetición continua de la lista y controles de pausa/siguiente. El sonido empieza con una interacción. Regalo interactivo con la pregunta «¿Me amas?» y un conejito animado llamado Messi Ronaldo, con controles de repetición y pausa.
 
 ## Abrir en Visual Studio Code
 

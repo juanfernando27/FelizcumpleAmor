@@ -94,43 +94,84 @@ $('#blow-candles').addEventListener('click', () => {
   if (out) celebrate();
 });
 
-// A quiet original instrumental, synthesized locally. Sound starts only on a tap.
-let audioContext, master, timer, playing = false, step = 0, nextNote = 0;
-const melody = [64,67,71,67,62,67,69,67,60,64,67,64,59,62,67,62,60,64,69,67,62,65,69,65,59,62,67,66,67,62,59,62];
-const bass = [48,43,45,47,48,50,43,47];
-function note(midi, time, volume, duration) {
-  const osc = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-  osc.type = 'triangle'; osc.frequency.value = 440 * 2 ** ((midi - 69) / 12);
-  gain.gain.setValueAtTime(0, time); gain.gain.linearRampToValueAtTime(volume, time + .012);
-  gain.gain.exponentialRampToValueAtTime(.0001, time + duration);
-  osc.connect(gain).connect(master); osc.start(time); osc.stop(time + duration + .05);
+const audio = $('#love-audio');
+const tracks = [
+  ['gone-gone-gone.mp3', 'Phillip Phillips · Gone, Gone, Gone'],
+  ['til-kingdom-come.mp3', 'Coldplay · Til Kingdom Come']
+];
+let trackIndex = 0;
+audio.volume = .55;
+function updateMusic() {
+  $('#music').setAttribute('aria-pressed', String(!audio.paused));
+  $('#music').querySelector('span').textContent = audio.paused ? 'Nuestra música' : 'Pausar música';
+  $('#track-play').textContent = audio.paused ? 'Escuchar nuestras canciones' : 'Pausar canción';
 }
-function schedule() {
-  while (nextNote < audioContext.currentTime + .2) {
-    note(melody[step % melody.length], nextNote, .12, 1.6);
-    if (step % 4 === 0) note(bass[(step / 4) % bass.length], nextNote, .15, 2.7);
-    nextNote += .62; step++;
-  }
+async function playMusic() {
+  try { await audio.play(); } catch { $('#audio-status').textContent = 'Toca Escuchar nuestras canciones para iniciar la música.'; }
+  updateMusic();
 }
-async function toggleMusic() {
-  const button = $('#music');
-  try {
-    if (!audioContext) {
-      const Audio = window.AudioContext || window.webkitAudioContext;
-      if (!Audio) throw new Error('Audio unavailable');
-      audioContext = new Audio(); master = audioContext.createGain(); master.gain.value = .4; master.connect(audioContext.destination);
-    }
-    if (playing) {
-      clearInterval(timer); await audioContext.suspend(); playing = false;
-    } else {
-      await audioContext.resume(); nextNote = audioContext.currentTime + .05; schedule(); timer = setInterval(schedule, 100); playing = true;
-    }
-    button.setAttribute('aria-pressed', String(playing));
-    button.querySelector('span').textContent = playing ? 'Pausar piano' : 'Piano para ti';
-  } catch {
-    $('#audio-status').textContent = 'No se pudo reproducir el piano en este navegador. Puedes seguir disfrutando tu regalo.';
-  }
+function toggleMusic() { if (audio.paused) void playMusic(); else audio.pause(); }
+function nextTrack() {
+  trackIndex = (trackIndex + 1) % tracks.length;
+  audio.src = `assets/music/${tracks[trackIndex][0]}`;
+  $('#track-title').textContent = tracks[trackIndex][1];
+  void playMusic();
 }
+audio.addEventListener('ended', nextTrack);
+audio.addEventListener('play', updateMusic);
+audio.addEventListener('pause', updateMusic);
+audio.addEventListener('error', () => { $('#audio-status').textContent = 'No se pudo cargar la canción. Toca Siguiente canción para intentar con la otra.'; updateMusic(); });
 $('#music').addEventListener('click', toggleMusic);
-document.addEventListener('visibilitychange', () => { if (document.hidden && playing) void toggleMusic(); });
+$('#track-play').addEventListener('click', toggleMusic);
+$('#track-next').addEventListener('click', nextTrack);
+
+const gift = $('#unwrap-gift');
+gift.addEventListener('click', () => {
+  gift.classList.add('unwrapped');
+  gift.setAttribute('aria-expanded', 'true');
+  $('#gift-instruction').textContent = 'Antes de abrirlo del todo…';
+  $('#love-question').hidden = false;
+  $('#love-yes').focus({ preventScroll: true });
+  $('#love-question').scrollIntoView({ block: 'center', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+});
+let refusals = 0;
+const no = $('#love-no');
+const yes = $('#love-yes');
+function dodgeNo(event) {
+  event.preventDefault();
+  refusals++;
+  const arena = $('#love-arena');
+  const scale = Math.max(.22, 1 - refusals * .12);
+  const yesScale = Math.min(1.5, 1 + refusals * .08);
+  yes.style.transform = `scale(${yesScale})`;
+  no.style.transform = `scale(${scale})`;
+  const width = arena.clientWidth;
+  const positions = [[.82,.12],[.18,.78],[.79,.8],[.18,.12]];
+  const [x,y] = positions[(refusals - 1) % positions.length];
+  no.style.left = `${Math.min(width - 70, Math.max(4, width * x - 32))}px`;
+  no.style.top = `${y * 145}px`;
+  $('#love-tease').textContent = ['¿Segura, segurita?', 'Creo que querías tocar el otro…', 'El «Sí» tiene una sorpresa muy bonita.', 'Ese «No» no se deja atrapar.'][Math.min(refusals - 1, 3)];
+}
+no.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') dodgeNo(e); });
+no.addEventListener('pointerdown', dodgeNo);
+no.addEventListener('click', dodgeNo);
+const bunnyDialog = $('#bunny-dialog');
+function replayBunny() {
+  const cinema = $('.bunny-cinema');
+  cinema.classList.remove('is-playing');
+  void cinema.offsetWidth;
+  cinema.classList.add('is-playing');
+}
+yes.addEventListener('click', () => {
+  bunnyDialog.showModal(); replayBunny(); celebrate();
+  if (audio.paused) void playMusic();
+});
+$('#close-bunny').addEventListener('click', () => bunnyDialog.close());
+$('#bunny-replay').addEventListener('click', replayBunny);
+$('#bunny-pause').addEventListener('click', () => {
+  const paused = $('.bunny-cinema').classList.toggle('motion-paused');
+  $('#bunny-pause').setAttribute('aria-pressed', String(paused));
+  $('#bunny-pause').textContent = paused ? 'Continuar movimiento' : 'Pausar movimiento';
+});
+bunnyDialog.addEventListener('close', () => $('.bunny-cinema').classList.remove('is-playing'));
+

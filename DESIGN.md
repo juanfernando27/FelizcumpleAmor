@@ -194,3 +194,5 @@ El foco global usa un contorno dorado de (3px) separado (6px). En las secciones 
 - **Don't** aplicar hover persistente a interacciones táctiles.
 - **Don't** añadir animación a todo el contenido ni retirar las reglas de movimiento reducido.
 - **Don't** confundir los colores auxiliares derivados del sidecar con nuevos colores aprobados del producto.
+
+La sorpresa final conserva vino, rosa y oro. Caja de regalo CSS, botones de respuesta y diálogo con conejito geométrico CSS, luna y estrellas. Entrada de 2.2 s, salto de 2 s y parpadeo de 4.5 s. Movimiento reducido elimina animación; el usuario puede pausarla o cerrar la escena. Música con HTMLAudioElement y dos pistas locales en ciclo.
